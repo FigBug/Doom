@@ -4,11 +4,14 @@
               reportAppUsage="0" displaySplashScreen="1" pluginFormats="buildAU,buildLV2,buildStandalone,buildVST,buildVST3"
               pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginManufacturerCode="Soca" pluginCode="SLor" pluginAUMainType="'aumu'"
-              cppLanguageStandard="17" pluginChannelConfigs="{0,2}" version="1.0.0"
+              cppLanguageStandard="20" pluginChannelConfigs="{0,2}" version="1.0.0"
               jucerFormatVersion="1" useAppConfig="0" addUsingNamespaceToJuceHeader="0"
               defines="JUCE_DISPLAY_SPLASH_SCREEN=0&#10;JUCE_MODAL_LOOPS_PERMITTED=1"
               lv2Uri="https://socalabs.com/Doom/">
   <MAINGROUP id="Hs1HPA" name="Doom">
+    <GROUP id="{64226C5F-B1F9-A1D8-F7EC-41424754AED6}" name="Assets">
+      <FILE id="YeGjKx" name="DOOM1.WAD" compile="0" resource="1" file="Assets/DOOM1.WAD"/>
+    </GROUP>
     <GROUP id="{0CE63D98-F319-7656-21CD-D7A21B4A4B6C}" name="Source">
       <FILE id="p0fko7" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
