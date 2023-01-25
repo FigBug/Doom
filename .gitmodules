@@ -1,0 +1,6 @@
+[submodule "modules/Gin_Doom"]
+	path = modules/Gin_Doom
+	url = git@github.com:FigBug/Gin_Doom.git
+[submodule "modules/JUCE"]
+	path = modules/JUCE
+	url = https://github.com/juce-framework/JUCE.git
