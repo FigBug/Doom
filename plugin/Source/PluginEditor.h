@@ -17,5 +17,7 @@ public:
 private:
     DoomAudioProcessor& proc;
 
+    gin::DoomComponent doom;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DoomAudioProcessorEditor)
 };

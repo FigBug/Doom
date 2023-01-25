@@ -36,6 +36,7 @@ void DoomAudioProcessor::releaseResources()
 
 void DoomAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midi)
 {
+    juce::ignoreUnused (buffer, midi);
     juce::ScopedNoDenormals noDenormals;
 }
 
