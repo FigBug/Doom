@@ -4,3 +4,6 @@
 [submodule "modules/JUCE"]
 	path = modules/JUCE
 	url = https://github.com/juce-framework/JUCE.git
+[submodule "modules/Gin"]
+	path = modules/Gin
+	url = git@github.com:FigBug/Gin.git
