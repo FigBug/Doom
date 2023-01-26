@@ -13,6 +13,9 @@ public:
     void stateUpdated() override;
     void updateState() override;
 
+    void registerEngine (gin::DoomAudioEngine&);
+    void unregisterEngine (gin::DoomAudioEngine&);
+
     //==============================================================================
     void reset() override;
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -23,6 +26,10 @@ public:
     //==============================================================================
     juce::AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override;
+
+private:
+    juce::CriticalSection lock;
+    juce::Array<gin::DoomAudioEngine*> engines;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DoomAudioProcessor)

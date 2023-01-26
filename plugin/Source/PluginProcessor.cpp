@@ -36,8 +36,14 @@ void DoomAudioProcessor::releaseResources()
 
 void DoomAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midi)
 {
-    juce::ignoreUnused (buffer, midi);
+    juce::ignoreUnused (midi);
     juce::ScopedNoDenormals noDenormals;
+
+    juce::ScopedLock sl (lock);
+    buffer.clear();
+
+    for (auto e :engines)
+        e->processBlock (buffer, (int)getSampleRate());
 }
 
 //==============================================================================
@@ -49,6 +55,18 @@ bool DoomAudioProcessor::hasEditor() const
 juce::AudioProcessorEditor* DoomAudioProcessor::createEditor()
 {
     return new DoomAudioProcessorEditor (*this);
+}
+
+void DoomAudioProcessor::registerEngine (gin::DoomAudioEngine& e)
+{
+    juce::ScopedLock sl (lock);
+    engines.add (&e);
+}
+
+void DoomAudioProcessor::unregisterEngine (gin::DoomAudioEngine& e)
+{
+    juce::ScopedLock sl (lock);
+    engines.removeFirstMatchingValue (&e);
 }
 
 //==============================================================================

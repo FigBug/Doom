@@ -22,10 +22,12 @@ DoomAudioProcessorEditor::DoomAudioProcessorEditor (DoomAudioProcessor& p_)
     }
 
     doom.startGame (wad);
+    proc.registerEngine (doom.getAudioEngine());
 }
 
 DoomAudioProcessorEditor::~DoomAudioProcessorEditor()
 {
+    proc.unregisterEngine (doom.getAudioEngine());
 }
 
 //==============================================================================
