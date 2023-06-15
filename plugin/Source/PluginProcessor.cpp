@@ -4,6 +4,20 @@
 //==============================================================================
 DoomAudioProcessor::DoomAudioProcessor()
 {
+	auto dir = juce::File::getSpecialLocation (juce::File::userApplicationDataDirectory);
+   #if JUCE_MAC
+	auto wad = dir.getChildFile ("Application Support/jDoom/DOOM1.WAD");
+   #else
+	auto wad = dir.getChildFile ("jDoom/DOOM1.WAD");
+   #endif
+
+	if (! wad.existsAsFile())
+	{
+		wad.getParentDirectory().createDirectory();
+		wad.replaceWithData (BinaryData::DOOM1_WAD, BinaryData::DOOM1_WADSize);
+	}
+
+	doom.startGame (wad);
 }
 
 DoomAudioProcessor::~DoomAudioProcessor()
@@ -39,11 +53,8 @@ void DoomAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::M
     juce::ignoreUnused (midi);
     juce::ScopedNoDenormals noDenormals;
 
-    juce::ScopedLock sl (lock);
     buffer.clear();
-
-    for (auto e :engines)
-        e->processBlock (buffer, (int)getSampleRate());
+	doom.getAudioEngine().processBlock (buffer, (int)getSampleRate());
 }
 
 //==============================================================================
@@ -55,18 +66,6 @@ bool DoomAudioProcessor::hasEditor() const
 juce::AudioProcessorEditor* DoomAudioProcessor::createEditor()
 {
     return new DoomAudioProcessorEditor (*this);
-}
-
-void DoomAudioProcessor::registerEngine (gin::DoomAudioEngine& e)
-{
-    juce::ScopedLock sl (lock);
-    engines.add (&e);
-}
-
-void DoomAudioProcessor::unregisterEngine (gin::DoomAudioEngine& e)
-{
-    juce::ScopedLock sl (lock);
-    engines.removeFirstMatchingValue (&e);
 }
 
 //==============================================================================
