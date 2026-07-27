@@ -31,5 +31,11 @@
 *.out
 *.app
 
-JuceLibraryCode
+xcuserdata
 Builds
+JuceLibraryCode
+ci/bin
+.DS_Store
+.claude
+build
+.cache
